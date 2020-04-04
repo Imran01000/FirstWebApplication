@@ -6,12 +6,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 
-	<table>
+	<div class="container">
+		<table border="1" class="table table-bordered table-secondary table-hover">
 	
-		<tr>
+		<tr class="table-danger">
 			<th>Name</th>
 			<th>Department</th>
 			<th>Date Of Birth</th>
@@ -26,6 +29,8 @@
 		</c:forEach>
 		
 	</table>
+	
+	</div>
 	
 </body>
 
