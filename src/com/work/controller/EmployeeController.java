@@ -26,6 +26,8 @@ public class EmployeeController extends HttpServlet
 	{
 		employeeDAO = new EmployeeDAOimplement();
 	}
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		//CALL DAO METHOD TO GET THE LIST OF EMPLOYEE.
@@ -43,7 +45,10 @@ public class EmployeeController extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		
+		String name = request.getParameter("fname");
+		String dob = request.getParameter("dob");
+		String role = request.getParameter("designation");
+		System.out.println(name+" "+dob+" "+role);
 	}
 
 }
