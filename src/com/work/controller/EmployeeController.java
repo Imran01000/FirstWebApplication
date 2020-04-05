@@ -17,7 +17,7 @@ import com.work.entity.Employee;
 public class EmployeeController extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	RequestDispatcher dispatcher = null;
 
 	//CREATE A REF VARIABLE FOR EmployeeDAO.
@@ -32,7 +32,22 @@ public class EmployeeController extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		String action = request.getParameter("action");
 		
+		if(action == null)
+		{
+			action = "LIST";
+		}
+		switch (action) 
+		{
+		case "LIST":
+			listEmployees(request, response);
+			break;
+			
+		default:
+			listEmployees(request, response);
+			break;
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -51,13 +66,23 @@ public class EmployeeController extends HttpServlet
 			request.setAttribute("message", "Save successfully!!");
 		}
 
+		listEmployees(request, response);
+		
+	}
+
+	public void listEmployees(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException
+	{
+		//CALL DAO METHOD TO GET THE LIST OF EMPLOYEE.
+		List<Employee> list = employeeDAO.get();
+
+		//ADD THE EMPLOYESS TO REQUEST OBJECT.
+		request.setAttribute("list", list);
+
 		//GET THE REQUEST DISPATCHER.
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/employee_list.jsp");
 
 		//FORWARD THE REQUEST AND RESPONSE OBJECTS.
 		dispatcher.forward(request, response);
 	}
-	
-	
 
 }
